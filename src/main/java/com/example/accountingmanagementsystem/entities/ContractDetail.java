@@ -1,15 +1,18 @@
 package com.example.accountingmanagementsystem.entities;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import lombok.Data;
 
-public class ContractDetail {
-    private Long id;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Data
+@Entity
+public class ContractDetail extends BaseEntity {
     private String periodOfContract;
-    private LocalDate from;
-    private LocalDate to;
+    private LocalDateTime from;
+    private LocalDateTime to;
+    private LocalDateTime fasDate;
     private BigDecimal parkingCharges1;
     private BigDecimal parkingCharges2;
-    
-
 }

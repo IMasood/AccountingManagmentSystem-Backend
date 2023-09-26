@@ -1,13 +1,17 @@
 package com.example.accountingmanagementsystem.entities;
 
-import javax.xml.stream.Location;
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.Data;
 
-public class Tenant {
-    private Long id;
+import java.util.List;
+
+@Data
+@Entity
+public class Tenant extends BaseEntity{
     private String tenantNo;
     private String name;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
+    @OneToMany
+    private List<CreditDetails> creditDetail;
 
 }
