@@ -1,6 +1,6 @@
 package com.example.accountingmanagementsystem.entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,4 +11,7 @@ public class CreditDetails extends BaseEntity {
     private String creditHead;
     private BigDecimal amount;
 
+    @ManyToOne
+    @JoinColumn(name = "tenant_id")
+    private Tenant tenant;
 }

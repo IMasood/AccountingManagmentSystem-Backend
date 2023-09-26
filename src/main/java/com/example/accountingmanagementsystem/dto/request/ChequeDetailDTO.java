@@ -1,21 +1,12 @@
-package com.example.accountingmanagementsystem.entities;
+package com.example.accountingmanagementsystem.dto.request;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@Entity
-public class ChequeDetail extends BaseEntity{
-
-    @ManyToOne
-    @JoinColumn(name = "bank_receipt_id")
-    private BankReceipt bankReceipt;
-
+public class ChequeDetailDTO {
     private LocalDateTime chequeDate;
     private String chequeDetail;
     private String drAccount;

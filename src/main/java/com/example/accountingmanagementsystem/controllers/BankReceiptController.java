@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "bank/receipt/")
+@RequestMapping(value = "api/v1/bank/receipt/")
 public class BankReceiptController {
 
 
