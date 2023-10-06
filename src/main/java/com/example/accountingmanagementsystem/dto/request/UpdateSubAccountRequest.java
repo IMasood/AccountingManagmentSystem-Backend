@@ -4,8 +4,7 @@ import com.example.accountingmanagementsystem.enums.MasterAccounts;
 import lombok.Data;
 
 @Data
-public class AddSubAccountRequest {
-    private String id;
+public class UpdateSubAccountRequest {
     private MasterAccounts parentAccountType;
     private long accountCode;
     private String name;
