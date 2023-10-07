@@ -4,7 +4,6 @@ import com.example.accountingmanagementsystem.dto.ApiResponse;
 import com.example.accountingmanagementsystem.dto.request.AddSubAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.UpdateSubAccountRequest;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
-import com.example.accountingmanagementsystem.enums.MasterAccounts;
 import com.example.accountingmanagementsystem.repos.ChartOfAccountRepository;
 import com.example.accountingmanagementsystem.services.ChartOfAccountService;
 import org.springframework.beans.factory.annotation.Autowired;

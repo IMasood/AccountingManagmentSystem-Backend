@@ -2,8 +2,8 @@ package com.example.accountingmanagementsystem.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-@Data
-@Entity
+//@Data
+//@Entity
 public class BankReceipt extends BaseEntity {
     private String voucherNo;
     private String buildingCode;

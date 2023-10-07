@@ -9,8 +9,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
-@Entity
+//@Data
+//@Entity
 public class ContractDetail extends BaseEntity{
 
     private String periodOfContract;

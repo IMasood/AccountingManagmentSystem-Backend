@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
-@Entity
+//@Data
+//@Entity
 public class Tenant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
