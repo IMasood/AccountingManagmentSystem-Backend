@@ -4,10 +4,12 @@ import com.example.accountingmanagementsystem.dto.ApiResponse;
 import com.example.accountingmanagementsystem.dto.request.AddSubAccountRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.UpdateSubAccountRequest;
 import com.example.accountingmanagementsystem.services.ChartOfAccountService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -19,13 +21,13 @@ public class ChartOfAccountController {
     private ChartOfAccountService chartOfAccountService;
 
     @PostMapping("/sub-account/add")
-    public ResponseEntity<ApiResponse<Long>> add(@RequestBody AddSubAccountRequestDTO request) throws Exception {
+    public ResponseEntity<ApiResponse<Long>> add(@Valid @RequestBody AddSubAccountRequestDTO request) throws Exception {
         ApiResponse<Long> response = chartOfAccountService.addAccount(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/sub-account/update/{accountId}")
-    public ResponseEntity<ApiResponse<Long>> update(@PathVariable long accountId, @RequestBody UpdateSubAccountRequest request) throws Exception {
+    public ResponseEntity<ApiResponse<Long>> update(@PathVariable long accountId, @Valid @RequestBody UpdateSubAccountRequest request) throws Exception {
         ApiResponse<Long> response = chartOfAccountService.updateAccount(accountId, request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
