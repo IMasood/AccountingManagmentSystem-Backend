@@ -1,7 +1,7 @@
 package com.example.accountingmanagementsystem.controllers;
 
 import com.example.accountingmanagementsystem.dto.ApiResponse;
-import com.example.accountingmanagementsystem.dto.request.AddSubAccountRequest;
+import com.example.accountingmanagementsystem.dto.request.AddSubAccountRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.UpdateSubAccountRequest;
 import com.example.accountingmanagementsystem.services.ChartOfAccountService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ public class ChartOfAccountController {
     private ChartOfAccountService chartOfAccountService;
 
     @PostMapping("/sub-account/add")
-    public ResponseEntity<ApiResponse<Long>> add(@RequestBody AddSubAccountRequest request) throws Exception {
+    public ResponseEntity<ApiResponse<Long>> add(@RequestBody AddSubAccountRequestDTO request) throws Exception {
         ApiResponse<Long> response = chartOfAccountService.addAccount(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

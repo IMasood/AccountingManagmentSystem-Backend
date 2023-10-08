@@ -1,7 +1,7 @@
 package com.example.accountingmanagementsystem.services.impl;
 
 import com.example.accountingmanagementsystem.dto.ApiResponse;
-import com.example.accountingmanagementsystem.dto.request.AddSubAccountRequest;
+import com.example.accountingmanagementsystem.dto.request.AddSubAccountRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.UpdateSubAccountRequest;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
 import com.example.accountingmanagementsystem.repos.ChartOfAccountRepository;
@@ -16,7 +16,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     private ChartOfAccountRepository chartOfAccountRepository;
 
     @Override
-    public ApiResponse<Long> addAccount(AddSubAccountRequest request) throws Exception {
+    public ApiResponse<Long> addAccount(AddSubAccountRequestDTO request) throws Exception {
         if (chartOfAccountRepository.existsByAccountCode(request.getAccountCode())){
             throw new Exception("Account is already with same account code!");
         }
