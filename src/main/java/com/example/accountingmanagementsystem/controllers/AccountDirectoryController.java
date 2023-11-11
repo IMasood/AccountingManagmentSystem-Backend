@@ -5,12 +5,12 @@ import com.example.accountingmanagementsystem.dto.request.AddAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.DeleteAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.GetAccountDirectoryRequest;
 import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
+import com.example.accountingmanagementsystem.dto.CustomPageResponse;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
 import com.example.accountingmanagementsystem.services.ChartOfAccountService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +42,8 @@ public class AccountDirectoryController {
     }
 
     @PostMapping()
-    public ResponseEntity<ApiResponse<Page<ChartOfAccount>>> getAccountDirectory(@RequestBody GetAccountDirectoryRequest request) throws Exception {
-        ApiResponse<Page<ChartOfAccount>> response = chartOfAccountService.getAccountDirectory(request);
+    public ResponseEntity<ApiResponse<CustomPageResponse<ChartOfAccount>>> getAccountDirectory(@RequestBody GetAccountDirectoryRequest request) throws Exception {
+        ApiResponse<CustomPageResponse<ChartOfAccount>> response = chartOfAccountService.getAccountDirectory(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

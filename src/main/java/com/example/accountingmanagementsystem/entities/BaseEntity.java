@@ -16,6 +16,4 @@ public class BaseEntity {
     private Long id;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private Long createdBy;
-    private Long modifiedBy;
 }

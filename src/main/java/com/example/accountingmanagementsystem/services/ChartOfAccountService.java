@@ -5,8 +5,8 @@ import com.example.accountingmanagementsystem.dto.request.AddAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.DeleteAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.GetAccountDirectoryRequest;
 import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
+import com.example.accountingmanagementsystem.dto.CustomPageResponse;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
-import org.springframework.data.domain.Page;
 
 public interface ChartOfAccountService {
 
@@ -16,7 +16,7 @@ public interface ChartOfAccountService {
 
     ApiResponse<Long> deleteAccount(DeleteAccountRequest accountId);
 
-    ApiResponse<Page<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request);
+    ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request);
 
     ApiResponse<ChartOfAccount> getAccountDetail(Long accountId);
 }
