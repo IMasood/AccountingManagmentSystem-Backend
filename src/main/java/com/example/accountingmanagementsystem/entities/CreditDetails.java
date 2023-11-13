@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
-//@Data
-//@Entity
+@Data
+@Entity
 public class CreditDetails extends BaseEntity {
     private String creditCode;
     private String creditHead;

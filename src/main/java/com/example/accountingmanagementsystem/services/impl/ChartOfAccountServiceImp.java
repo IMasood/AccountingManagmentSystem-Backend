@@ -6,6 +6,7 @@ import com.example.accountingmanagementsystem.dto.request.DeleteAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.GetAccountDirectoryRequest;
 import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
 import com.example.accountingmanagementsystem.dto.CustomPageResponse;
+import com.example.accountingmanagementsystem.dto.response.GetCreditCodesResponse;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
 import com.example.accountingmanagementsystem.repos.ChartOfAccountFilterSpecification;
 import com.example.accountingmanagementsystem.repos.ChartOfAccountRepository;
@@ -16,6 +17,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ChartOfAccountServiceImp implements ChartOfAccountService {
@@ -73,4 +76,20 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
                 .orElseThrow(() -> new RuntimeException("Account not found!"));
         return new ApiResponse<>(account);
     }
+
+    @Override
+    public ApiResponse<List<GetCreditCodesResponse>> getAllCreditCodes() {
+        List<GetCreditCodesResponse> response = chartOfAccountRepository.findAll()
+                .stream()
+                .map(chartOfAccount -> {
+                    GetCreditCodesResponse creditCodesResponse = new GetCreditCodesResponse();
+                    creditCodesResponse.setId(chartOfAccount.getId());
+                    creditCodesResponse.setCreditCode(chartOfAccount.getCreditCode());
+                    creditCodesResponse.setCreditHead(chartOfAccount.getCreditHead());
+                    return creditCodesResponse;
+                }).collect(Collectors.toList());
+        return new ApiResponse<>(response);
+    }
+
+
 }

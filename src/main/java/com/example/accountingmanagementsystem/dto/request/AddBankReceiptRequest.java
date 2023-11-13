@@ -2,6 +2,8 @@ package com.example.accountingmanagementsystem.dto.request;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class AddBankReceiptRequest {
     private String voucherNo;
@@ -9,6 +11,5 @@ public class AddBankReceiptRequest {
     private String buildingName;
     private String flatNo;
     private TenantDetailDTO tenantDetail;
-    private ContractDetailDTO contractDetail;
-    private ChequeDetailDTO chequeDetailList;
+    private List<ChequeDetailDTO> chequeDetailList;
 }

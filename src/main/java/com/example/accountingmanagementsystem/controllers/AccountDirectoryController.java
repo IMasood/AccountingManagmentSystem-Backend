@@ -6,6 +6,7 @@ import com.example.accountingmanagementsystem.dto.request.DeleteAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.GetAccountDirectoryRequest;
 import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
 import com.example.accountingmanagementsystem.dto.CustomPageResponse;
+import com.example.accountingmanagementsystem.dto.response.GetCreditCodesResponse;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
 import com.example.accountingmanagementsystem.services.ChartOfAccountService;
 import jakarta.validation.Valid;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -51,6 +54,12 @@ public class AccountDirectoryController {
     public ResponseEntity<ApiResponse<ChartOfAccount>> getAccountDetail(@PathVariable Long accountId) throws Exception {
         ApiResponse<ChartOfAccount> response = chartOfAccountService.getAccountDetail(accountId);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("get-all-credit-codes")
+    public ResponseEntity<ApiResponse<List<GetCreditCodesResponse>>> getAllCreditCodes() throws Exception {
+        ApiResponse<List<GetCreditCodesResponse>> allCreditCodes = chartOfAccountService.getAllCreditCodes();
+        return new ResponseEntity<>(allCreditCodes, HttpStatus.OK);
     }
 
 
