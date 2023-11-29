@@ -13,11 +13,11 @@ import java.util.List;
 
 public interface ChartOfAccountService {
 
-    ApiResponse<Long> addAccount(AddAccountRequest request) throws Exception;
+    ApiResponse<String> addAccount(AddAccountRequest request) throws Exception;
 
-    ApiResponse<Long> updateAccount(long accountId, UpdateAccountRequest request) throws Exception;
+    ApiResponse<Void> updateAccount(UpdateAccountRequest request) throws Exception;
 
-    ApiResponse<Long> deleteAccount(DeleteAccountRequest accountId);
+    ApiResponse<Void> deleteAccount(DeleteAccountRequest accountId);
 
     ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request);
 

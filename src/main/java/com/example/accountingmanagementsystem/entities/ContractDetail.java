@@ -1,9 +1,9 @@
 package com.example.accountingmanagementsystem.entities;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+//import jakarta.persistence.Embeddable;
+//import jakarta.persistence.Entity;
+//import jakarta.persistence.JoinColumn;
+//import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -20,7 +20,7 @@ public class ContractDetail extends BaseEntity{
     private BigDecimal parkingCharges1;
     private BigDecimal parkingCharges2;
 
-    @OneToOne
-    @JoinColumn(name = "bank_receipt_id")
-    private BankReceipt bankReceipt;
+//    @OneToOne
+//    @JoinColumn(name = "bank_receipt_id")
+//    private BankReceipt bankReceipt;
 }

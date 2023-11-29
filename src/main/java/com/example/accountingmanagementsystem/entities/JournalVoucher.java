@@ -1,10 +1,10 @@
 package com.example.accountingmanagementsystem.entities;
 
-import jakarta.persistence.Entity;
-import lombok.Data;
+//import jakarta.persistence.Entity;
+//import lombok.Data;
 
-@Entity
-@Data
+//@Entity
+//@Data
 public class JournalVoucher extends BaseEntity{
     private Long accountCode;
     private String accountHead;

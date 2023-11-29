@@ -27,7 +27,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     private ChartOfAccountRepository chartOfAccountRepository;
 
     @Override
-    public ApiResponse<Long> addAccount(AddAccountRequest request) throws Exception {
+    public ApiResponse<String> addAccount(AddAccountRequest request) throws Exception {
         if (chartOfAccountRepository.existsByCreditCode(request.getCreditCode())){
             throw new Exception("Account is already with same credit code!");
         }
@@ -43,8 +43,8 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     }
 
     @Override
-    public ApiResponse<Long> updateAccount(long accountId, UpdateAccountRequest request) throws Exception {
-        ChartOfAccount account = chartOfAccountRepository.findById(accountId).orElseThrow(
+    public ApiResponse<Void> updateAccount(UpdateAccountRequest request) throws Exception {
+        ChartOfAccount account = chartOfAccountRepository.findById(request.getId()).orElseThrow(
                 () -> new RuntimeException("Account not found!")
         );
         account.setMasterAccount(request.getMasterAccountCode());
@@ -55,7 +55,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     }
 
     @Override
-    public ApiResponse<Long> deleteAccount(DeleteAccountRequest request) {
+    public ApiResponse<Void> deleteAccount(DeleteAccountRequest request) {
         request.getAccountIds().forEach(id-> chartOfAccountRepository.deleteById(id));
         return new ApiResponse<>(true, "Account is successfully deleted!");
     }
@@ -63,18 +63,16 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     @Override
     public ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getPageNumber(), request.getPageSize());
-        Page<ChartOfAccount> accountDirectory = chartOfAccountRepository.findAll(ChartOfAccountFilterSpecification.withFilters(
-                request.getFilterByMasterAccount(),
-                request.getFilterByCreditCode()),
-                pageRequest);
+        Page<ChartOfAccount> accountDirectory = chartOfAccountRepository.findAll(pageRequest);
         return new ApiResponse<>(new CustomPageResponse<>(accountDirectory));
     }
 
     @Override
     public ApiResponse<ChartOfAccount> getAccountDetail(Long accountId) {
-        ChartOfAccount account = chartOfAccountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account not found!"));
-        return new ApiResponse<>(account);
+////        ChartOfAccount account = chartOfAccountRepository.findById(accountId)
+////                .orElseThrow(() -> new RuntimeException("Account not found!"));
+//        return new ApiResponse<>(account);
+        return null;
     }
 
     @Override
@@ -83,7 +81,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
                 .stream()
                 .map(chartOfAccount -> {
                     GetCreditCodesResponse creditCodesResponse = new GetCreditCodesResponse();
-                    creditCodesResponse.setId(chartOfAccount.getId());
+                    //creditCodesResponse.setId(chartOfAccount.getId());
                     creditCodesResponse.setCreditCode(chartOfAccount.getCreditCode());
                     creditCodesResponse.setCreditHead(chartOfAccount.getCreditHead());
                     return creditCodesResponse;

@@ -1,8 +1,5 @@
 package com.example.accountingmanagementsystem.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,8 +9,8 @@ import java.time.LocalDateTime;
 //@Entity
 public class ChequeDetail extends BaseEntity{
 
-    @ManyToOne
-    @JoinColumn(name = "bank_receipt_id")
+//    @ManyToOne
+//    @JoinColumn(name = "bank_receipt_id")
     private BankReceipt bankReceipt;
 
     private LocalDateTime chequeDate;

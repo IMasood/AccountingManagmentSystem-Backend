@@ -27,20 +27,20 @@ public class AccountDirectoryController {
     private ChartOfAccountService chartOfAccountService;
 
     @PostMapping("add")
-    public ResponseEntity<ApiResponse<Long>> add(@Valid @RequestBody AddAccountRequest request) throws Exception {
-        ApiResponse<Long> response = chartOfAccountService.addAccount(request);
+    public ResponseEntity<ApiResponse<String>> add(@Valid @RequestBody AddAccountRequest request) throws Exception {
+        ApiResponse<String> response = chartOfAccountService.addAccount(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("update/{accountId}")
-    public ResponseEntity<ApiResponse<Long>> update(@PathVariable long accountId, @Valid @RequestBody UpdateAccountRequest request) throws Exception {
-        ApiResponse<Long> response = chartOfAccountService.updateAccount(accountId, request);
+    @PostMapping("update")
+    public ResponseEntity<ApiResponse<Void>> update(@Valid @RequestBody UpdateAccountRequest request) throws Exception {
+        ApiResponse<Void> response = chartOfAccountService.updateAccount(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("delete")
-    public ResponseEntity<ApiResponse<Long>> delete(@RequestBody DeleteAccountRequest request) throws Exception {
-        ApiResponse<Long> response = chartOfAccountService.deleteAccount(request);
+    public ResponseEntity<ApiResponse<Void>> delete(@RequestBody DeleteAccountRequest request) throws Exception {
+        ApiResponse<Void> response = chartOfAccountService.deleteAccount(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -50,7 +50,7 @@ public class AccountDirectoryController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("{accountId}")
+    @GetMapping("get-account-detail")
     public ResponseEntity<ApiResponse<ChartOfAccount>> getAccountDetail(@PathVariable Long accountId) throws Exception {
         ApiResponse<ChartOfAccount> response = chartOfAccountService.getAccountDetail(accountId);
         return new ResponseEntity<>(response, HttpStatus.OK);
