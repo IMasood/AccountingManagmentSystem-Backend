@@ -3,7 +3,7 @@ package com.example.accountingmanagementsystem.services;
 import com.example.accountingmanagementsystem.dto.ApiResponse;
 import com.example.accountingmanagementsystem.dto.request.AddAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.DeleteAccountRequest;
-import com.example.accountingmanagementsystem.dto.request.GetAccountDirectoryRequest;
+import com.example.accountingmanagementsystem.dto.request.ListAccountDirectoryRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
 import com.example.accountingmanagementsystem.dto.CustomPageResponse;
 import com.example.accountingmanagementsystem.dto.response.GetCreditCodesResponse;
@@ -19,7 +19,7 @@ public interface ChartOfAccountService {
 
     ApiResponse<Void> deleteAccount(DeleteAccountRequest accountId);
 
-    ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request);
+    ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(ListAccountDirectoryRequestDTO request);
 
     ApiResponse<ChartOfAccount> getAccountDetail(String accountId);
 

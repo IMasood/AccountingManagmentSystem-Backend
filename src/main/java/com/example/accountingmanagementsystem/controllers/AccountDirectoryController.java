@@ -3,7 +3,7 @@ package com.example.accountingmanagementsystem.controllers;
 import com.example.accountingmanagementsystem.dto.ApiResponse;
 import com.example.accountingmanagementsystem.dto.request.AddAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.DeleteAccountRequest;
-import com.example.accountingmanagementsystem.dto.request.GetAccountDirectoryRequest;
+import com.example.accountingmanagementsystem.dto.request.ListAccountDirectoryRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
 import com.example.accountingmanagementsystem.dto.CustomPageResponse;
 import com.example.accountingmanagementsystem.dto.response.GetCreditCodesResponse;
@@ -45,7 +45,7 @@ public class AccountDirectoryController {
     }
 
     @PostMapping()
-    public ResponseEntity<ApiResponse<CustomPageResponse<ChartOfAccount>>> getAccountDirectory(@RequestBody GetAccountDirectoryRequest request) throws Exception {
+    public ResponseEntity<ApiResponse<CustomPageResponse<ChartOfAccount>>> getAccountDirectory(@RequestBody ListAccountDirectoryRequestDTO request) throws Exception {
         ApiResponse<CustomPageResponse<ChartOfAccount>> response = chartOfAccountService.getAccountDirectory(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

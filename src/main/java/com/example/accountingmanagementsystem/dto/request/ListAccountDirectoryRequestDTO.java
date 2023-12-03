@@ -6,11 +6,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GetAccountDirectoryRequest {
-    private Long filterByMasterAccount;
-    private Long filterByCreditCode;
+public class ListAccountDirectoryRequestDTO {
     @NotNull
     private Integer pageNumber;
     @NotNull
     private Integer pageSize;
+
+    private AccountDirectoryFilter filters;
 }

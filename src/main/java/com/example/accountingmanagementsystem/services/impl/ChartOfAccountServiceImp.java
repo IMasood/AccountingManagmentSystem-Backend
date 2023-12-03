@@ -3,12 +3,11 @@ package com.example.accountingmanagementsystem.services.impl;
 import com.example.accountingmanagementsystem.dto.ApiResponse;
 import com.example.accountingmanagementsystem.dto.request.AddAccountRequest;
 import com.example.accountingmanagementsystem.dto.request.DeleteAccountRequest;
-import com.example.accountingmanagementsystem.dto.request.GetAccountDirectoryRequest;
+import com.example.accountingmanagementsystem.dto.request.ListAccountDirectoryRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
 import com.example.accountingmanagementsystem.dto.CustomPageResponse;
 import com.example.accountingmanagementsystem.dto.response.GetCreditCodesResponse;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
-import com.example.accountingmanagementsystem.repos.ChartOfAccountFilterSpecification;
 import com.example.accountingmanagementsystem.repos.ChartOfAccountRepository;
 import com.example.accountingmanagementsystem.services.ChartOfAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,15 +64,20 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     }
 
     @Override
-    public ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request) {
+    public ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(ListAccountDirectoryRequestDTO request) {
         PageRequest pageRequest = PageRequest.of(request.getPageNumber(), request.getPageSize());
-        Query query = new Query();
-        if (request.getFilterByMasterAccount() != null) {
-            query.addCriteria(Criteria.where("masterAccount").is(request.getFilterByMasterAccount()));
+
+        if (request.getFilters() == null){
+            return new ApiResponse<>(new CustomPageResponse<>(chartOfAccountRepository.findAll(pageRequest)));
         }
 
-        if (request.getFilterByCreditCode() != null) {
-            query.addCriteria(Criteria.where("creditCode").is(request.getFilterByCreditCode()));
+        Query query = new Query();
+        if (request.getFilters().getMasterAccount() != null) {
+            query.addCriteria(Criteria.where("masterAccount").is(request.getFilters().getMasterAccount()));
+        }
+
+        if (request.getFilters().getCreditCode() != null) {
+            query.addCriteria(Criteria.where("creditCode").is(request.getFilters().getCreditCode()));
         }
 
         long totalCount = mongoTemplate.count(query, ChartOfAccount.class);
