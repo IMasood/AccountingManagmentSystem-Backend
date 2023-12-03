@@ -13,14 +13,7 @@ import java.util.Date;
 
 @Data
 @Document
-public class JournalVoucher {
-    @Id
-    private String id;
-    @CreatedDate
-    private Date createdDate;
-    @LastModifiedDate
-    private Date modifiedDate;
-
+public class JournalVoucher extends BaseEntity{
     private Long accountCode;
     private String accountHead;
     private String narration;

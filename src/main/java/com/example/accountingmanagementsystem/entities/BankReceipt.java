@@ -17,16 +17,7 @@ import java.util.List;
 @Document
 @Getter
 @Setter
-public class BankReceipt {
-    @Id
-    private String id;
-
-    @CreatedDate
-    private Date createdDate;
-
-    @LastModifiedDate
-    private Date modifiedDate;
-
+public class BankReceipt extends BaseEntity{
     private String voucherNo;
     private String buildingCode;
     private String buildingName;

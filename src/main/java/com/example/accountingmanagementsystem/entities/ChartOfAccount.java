@@ -16,16 +16,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Document
-public class ChartOfAccount{
-
-    @Id
-    private String id;
+public class ChartOfAccount extends BaseEntity{
     private Long masterAccount;
     private Long creditCode;
     private String creditHead;
-    @CreatedDate
-    private Date createdDate;
-
-    @LastModifiedDate
-    private Date modifiedDate;
 }

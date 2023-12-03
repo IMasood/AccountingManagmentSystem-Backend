@@ -1,19 +1,19 @@
 package com.example.accountingmanagementsystem.entities;
 
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
-//import jakarta.persistence.Id;
-//import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
-
-//@MappedSuperclass
+import java.util.Date;
 @Data
 public class BaseEntity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    @Id
+    private String id;
+
+    @CreatedDate
+    private Date createdDate;
+
+    @LastModifiedDate
+    private Date modifiedDate;
 }
