@@ -21,7 +21,7 @@ public interface ChartOfAccountService {
 
     ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request);
 
-    ApiResponse<ChartOfAccount> getAccountDetail(Long accountId);
+    ApiResponse<ChartOfAccount> getAccountDetail(String accountId);
 
     ApiResponse<List<GetCreditCodesResponse>> getAllCreditCodes();
 }

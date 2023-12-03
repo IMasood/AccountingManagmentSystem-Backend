@@ -51,7 +51,7 @@ public class AccountDirectoryController {
     }
 
     @GetMapping("get-account-detail")
-    public ResponseEntity<ApiResponse<ChartOfAccount>> getAccountDetail(@PathVariable Long accountId) throws Exception {
+    public ResponseEntity<ApiResponse<ChartOfAccount>> getAccountDetail(@RequestParam String accountId) throws Exception {
         ApiResponse<ChartOfAccount> response = chartOfAccountService.getAccountDetail(accountId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

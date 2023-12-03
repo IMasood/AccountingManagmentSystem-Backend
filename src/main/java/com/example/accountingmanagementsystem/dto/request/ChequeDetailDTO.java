@@ -4,10 +4,11 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class ChequeDetailDTO {
-    private LocalDateTime chequeDate;
+    private String  chequeDate;
     private String chequeDetail;
     private String drAccount;
     private String bankName;

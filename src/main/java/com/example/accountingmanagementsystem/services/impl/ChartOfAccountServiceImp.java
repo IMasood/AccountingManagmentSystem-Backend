@@ -14,6 +14,10 @@ import com.example.accountingmanagementsystem.services.ChartOfAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,6 +30,9 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     @Autowired
     private ChartOfAccountRepository chartOfAccountRepository;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     @Override
     public ApiResponse<String> addAccount(AddAccountRequest request) throws Exception {
         if (chartOfAccountRepository.existsByCreditCode(request.getCreditCode())){
@@ -36,8 +43,6 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
         account.setMasterAccount(request.getMasterAccountCode());
         account.setCreditCode(request.getCreditCode());
         account.setCreditHead(request.getCreditHead());
-        account.setCreatedDate(LocalDateTime.now());
-        account.setModifiedDate(LocalDateTime.now());
         chartOfAccountRepository.save(account);
         return new ApiResponse<>(true, "Account is successfully added");
     }
@@ -63,16 +68,26 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     @Override
     public ApiResponse<CustomPageResponse<ChartOfAccount>> getAccountDirectory(GetAccountDirectoryRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getPageNumber(), request.getPageSize());
-        Page<ChartOfAccount> accountDirectory = chartOfAccountRepository.findAll(pageRequest);
+        Query query = new Query();
+        if (request.getFilterByMasterAccount() != null) {
+            query.addCriteria(Criteria.where("masterAccount").is(request.getFilterByMasterAccount()));
+        }
+
+        if (request.getFilterByCreditCode() != null) {
+            query.addCriteria(Criteria.where("creditCode").is(request.getFilterByCreditCode()));
+        }
+
+        long totalCount = mongoTemplate.count(query, ChartOfAccount.class);
+        query.with(pageRequest);
+        Page<ChartOfAccount> accountDirectory = PageableExecutionUtils.getPage(mongoTemplate.find(query, ChartOfAccount.class), pageRequest, () -> totalCount);
         return new ApiResponse<>(new CustomPageResponse<>(accountDirectory));
     }
 
     @Override
-    public ApiResponse<ChartOfAccount> getAccountDetail(Long accountId) {
-////        ChartOfAccount account = chartOfAccountRepository.findById(accountId)
-////                .orElseThrow(() -> new RuntimeException("Account not found!"));
-//        return new ApiResponse<>(account);
-        return null;
+    public ApiResponse<ChartOfAccount> getAccountDetail(String accountId) {
+        ChartOfAccount account = chartOfAccountRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("Account not found!"));
+        return new ApiResponse<>(account);
     }
 
     @Override
@@ -81,7 +96,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
                 .stream()
                 .map(chartOfAccount -> {
                     GetCreditCodesResponse creditCodesResponse = new GetCreditCodesResponse();
-                    //creditCodesResponse.setId(chartOfAccount.getId());
+                    creditCodesResponse.setId(chartOfAccount.getId());
                     creditCodesResponse.setCreditCode(chartOfAccount.getCreditCode());
                     creditCodesResponse.setCreditHead(chartOfAccount.getCreditHead());
                     return creditCodesResponse;

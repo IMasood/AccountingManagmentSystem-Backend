@@ -2,13 +2,19 @@ package com.example.accountingmanagementsystem.entities;
 
 //import jakarta.persistence.Entity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
-@Data
-//@Entity
+
+@Getter
+@Setter
 @Document
 public class ChartOfAccount{
 
@@ -17,6 +23,9 @@ public class ChartOfAccount{
     private Long masterAccount;
     private Long creditCode;
     private String creditHead;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    @CreatedDate
+    private Date createdDate;
+
+    @LastModifiedDate
+    private Date modifiedDate;
 }

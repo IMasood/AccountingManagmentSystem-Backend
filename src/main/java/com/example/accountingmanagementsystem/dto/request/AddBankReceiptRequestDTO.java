@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class AddBankReceiptRequest {
+public class AddBankReceiptRequestDTO {
     private String voucherNo;
     private String buildingCode;
     private String buildingName;
