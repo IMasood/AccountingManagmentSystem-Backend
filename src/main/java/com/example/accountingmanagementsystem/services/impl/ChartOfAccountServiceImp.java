@@ -8,6 +8,7 @@ import com.example.accountingmanagementsystem.dto.request.UpdateAccountRequest;
 import com.example.accountingmanagementsystem.dto.CustomPageResponse;
 import com.example.accountingmanagementsystem.dto.response.GetCreditCodesResponse;
 import com.example.accountingmanagementsystem.entities.ChartOfAccount;
+import com.example.accountingmanagementsystem.exception.ApiException;
 import com.example.accountingmanagementsystem.repos.ChartOfAccountRepository;
 import com.example.accountingmanagementsystem.services.ChartOfAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     @Override
     public ApiResponse<String> addAccount(AddAccountRequest request) throws Exception {
         if (chartOfAccountRepository.existsByCreditCode(request.getCreditCode())){
-            throw new Exception("Account is already with same credit code!");
+            throw new ApiException("Account is already with same credit code!");
         }
 
         ChartOfAccount account = new ChartOfAccount();
@@ -48,7 +49,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     @Override
     public ApiResponse<Void> updateAccount(UpdateAccountRequest request) throws Exception {
         ChartOfAccount account = chartOfAccountRepository.findById(request.getId()).orElseThrow(
-                () -> new RuntimeException("Account not found!")
+                () -> new ApiException("Account not found!")
         );
         account.setMasterAccount(request.getMasterAccountCode());
         account.setCreditCode(request.getCreditCode());
@@ -89,7 +90,7 @@ public class ChartOfAccountServiceImp implements ChartOfAccountService {
     @Override
     public ApiResponse<ChartOfAccount> getAccountDetail(String accountId) {
         ChartOfAccount account = chartOfAccountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account not found!"));
+                .orElseThrow(() -> new ApiException("Account not found!"));
         return new ApiResponse<>(account);
     }
 

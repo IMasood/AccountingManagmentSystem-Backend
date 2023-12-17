@@ -6,6 +6,7 @@ import com.example.accountingmanagementsystem.dto.request.AddBankReceiptRequestD
 import com.example.accountingmanagementsystem.dto.request.ListBankReceiptRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.UpdateBankReceiptRequestDTO;
 import com.example.accountingmanagementsystem.entities.BankReceipt;
+import com.example.accountingmanagementsystem.exception.ApiException;
 import com.example.accountingmanagementsystem.repos.BankReceiptRepository;
 import com.example.accountingmanagementsystem.services.BankReceiptService;
 import lombok.extern.slf4j.Slf4j;
@@ -63,14 +64,14 @@ public class BankReceiptServiceImp implements BankReceiptService {
     @Override
     public ApiResponse<BankReceipt> getBankReceiptDetail(String bankReceiptId) {
         BankReceipt bankReceipt = bankReceiptRepository.findById(bankReceiptId)
-                .orElseThrow(() -> new RuntimeException("Bank Receipt Not found!"));
+                .orElseThrow(() -> new ApiException("Bank Receipt Not found!"));
         return new ApiResponse<>(bankReceipt);
     }
 
     @Override
     public ApiResponse<Void> updateBankReceipt(UpdateBankReceiptRequestDTO request) {
         BankReceipt bankReceipt = bankReceiptRepository.findById(request.getBankReceiptId())
-                .orElseThrow(() -> new RuntimeException("Bank Receipt not found!"));
+                .orElseThrow(() -> new ApiException("Bank Receipt not found!"));
         bankReceipt.updateBank(request);
         bankReceiptRepository.save(bankReceipt);
         return new ApiResponse<>(true, "Bank Receipt is successfully updated!");
