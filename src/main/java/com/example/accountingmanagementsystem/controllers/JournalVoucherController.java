@@ -2,7 +2,6 @@ package com.example.accountingmanagementsystem.controllers;
 
 import com.example.accountingmanagementsystem.dto.ApiResponse;
 import com.example.accountingmanagementsystem.dto.CustomPageResponse;
-import com.example.accountingmanagementsystem.dto.request.AddBankReceiptRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.AddVoucherRequestDTO;
 import com.example.accountingmanagementsystem.dto.request.ListVoucherRequestDTO;
 import com.example.accountingmanagementsystem.entities.JournalVoucher;
@@ -11,13 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
+@CrossOrigin
 @Slf4j
 @RestController
 @RequestMapping(value = "api/v1/journal-voucher/*")
