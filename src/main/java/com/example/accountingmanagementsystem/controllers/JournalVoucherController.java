@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
-@CrossOrigin
 @Slf4j
 @RestController
 @RequestMapping(value = "api/v1/journal-voucher/*")
